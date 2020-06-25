@@ -11,10 +11,10 @@ import UIKit
 class CustomUIView: UIView {
     
     private let colors: [CGColor] = [
-        CGColor(srgbRed: 37/255, green: 204/255, blue: 195/255, alpha: 1.0),
-        CGColor(srgbRed: 247/255, green: 206/255, blue: 35/255, alpha: 1.0),
         CGColor(srgbRed: 143/255, green: 39/255, blue: 204/255, alpha: 1.0),
         CGColor(srgbRed: 31/255, green: 170/255, blue: 193/255, alpha: 1.0),
+        CGColor(srgbRed: 247/255, green: 206/255, blue: 35/255, alpha: 1.0),
+        CGColor(srgbRed: 37/255, green: 204/255, blue: 195/255, alpha: 1.0),
         CGColor(srgbRed: 7/255, green: 135/255, blue: 220/255, alpha: 1.0)
     ]
     
@@ -43,7 +43,7 @@ class CustomUIView: UIView {
         shapeLayer.strokeStart = 0
         shapeLayer.strokeEnd = 0
         shapeLayer.strokeColor = color
-        let circlepPath = UIBezierPath(arcCenter: iziImageView.center, radius: iziImageView.bounds.width / 2, startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 2), clockwise: true)
+        let circlepPath = UIBezierPath(arcCenter: iziImageView.center, radius: iziImageView.bounds.width / 2, startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 4), clockwise: true)
         shapeLayer.path = circlepPath.cgPath
         return shapeLayer
     }
@@ -53,20 +53,18 @@ class CustomUIView: UIView {
         strokeEndAnimation.fromValue = fromValue
         strokeEndAnimation.toValue = toValue
         strokeEndAnimation.repeatCount = 1
-        strokeEndAnimation.duration = duration/2
+        strokeEndAnimation.duration = 2*duration/3
         strokeEndAnimation.beginTime = 0
         strokeEndAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         strokeEndAnimation.fillMode = CAMediaTimingFillMode.forwards
         strokeEndAnimation.isRemovedOnCompletion = false
         
-        let strokeEndAnimTime = strokeEndAnimation.beginTime + strokeEndAnimation.duration
-        
         let strokeStartAnimation = CABasicAnimation(keyPath: "strokeStart")
         strokeStartAnimation.fromValue = fromValue
         strokeStartAnimation.toValue = toValue
         strokeStartAnimation.repeatCount = 1
-        strokeStartAnimation.duration = duration/2 - duration/4
-        strokeStartAnimation.beginTime = strokeEndAnimTime + duration/4
+        strokeStartAnimation.duration = duration
+        strokeStartAnimation.beginTime = 0.1
         strokeStartAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         strokeStartAnimation.fillMode = CAMediaTimingFillMode.forwards
         strokeStartAnimation.isRemovedOnCompletion = false
